@@ -1,10 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
+	<title>Image Classifier</title>
+	<style >
+		* {
+			font-size: 30px;
+		}
+	</style>
 </head>
 <body>
-$END$
+	<input id='image-input' type='image'/>
+	<button id='name-button'>Submit image</button>
+	<p id='greeting'></p>
+
+	<script src='http://code.jquery.com/jquery-3.3.1.min.js'></script>
+	<script>
+		$('#name-button').click(function(event){
+			let message = {
+				name: $('image-input').val()
+			}
+			$.post('http://http://127.0.0.1:5000/predict', JSON.stringify(message), function(response){
+				$('#greeting').text(response.greeting);
+				console.log(response);
+			});
+		});
+	</script>
 </body>
 </html>
